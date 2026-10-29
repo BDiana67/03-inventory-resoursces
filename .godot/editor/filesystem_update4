@@ -1,0 +1,10 @@
+res://script/global.gd
+res://item_data.gd
+res://scenes/inventory.tscn
+res://Resources/mushroom.tres
+res://Resources/wood.tres
+res://assets/ASSET_PACK_02/1.tres
+res://Resources/axe.tres
+res://inventory.gd
+res://script/Player.gd
+res://scenes/mushrooms.tscn

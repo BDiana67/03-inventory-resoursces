@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="ItemData" format=3 uid="uid://ddkheyvnsdhh0"]
+
+[ext_resource type="Script" uid="uid://df0s7q4fv1obj" path="res://item_data.gd" id="1_wvnmp"]
+[ext_resource type="Texture2D" uid="uid://bn66i5mugf6nt" path="res://assets/ASSET_PACK_02/sprite.png" id="1_xxxpj"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ihi7w"]
+atlas = ExtResource("1_xxxpj")
+region = Rect2(3, 20, 10, 8)
+
+[resource]
+script = ExtResource("1_wvnmp")
+name = "mushroom"
+icon = SubResource("AtlasTexture_ihi7w")
+metadata/_custom_type_script = "uid://df0s7q4fv1obj"

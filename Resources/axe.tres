@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="ItemData" format=3 uid="uid://b6kwbsaculfg7"]
+
+[ext_resource type="Texture2D" uid="uid://cm1swwlxsftvn" path="res://assets/ASSET_PACK_02/sprite_2.png" id="1_3cq7u"]
+[ext_resource type="Script" uid="uid://df0s7q4fv1obj" path="res://item_data.gd" id="1_4n384"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kufwm"]
+atlas = ExtResource("1_3cq7u")
+region = Rect2(1, 3, 14, 11)
+
+[resource]
+script = ExtResource("1_4n384")
+name = "axe"
+icon = SubResource("AtlasTexture_kufwm")
+is_tool = true
+metadata/_custom_type_script = "uid://df0s7q4fv1obj"
