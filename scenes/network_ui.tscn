@@ -1,0 +1,55 @@
+[gd_scene format=3 uid="uid://dsq5p1dfrblk5"]
+
+[ext_resource type="Script" uid="uid://dvulrom5uvyn6" path="res://script/network_ui.gd" id="1_6d2yf"]
+[ext_resource type="PackedScene" uid="uid://cygwouwf5i2ea" path="res://scenes/player.tscn" id="2_6d2yf"]
+[ext_resource type="Theme" uid="uid://bip6qdu7ppvpu" path="res://assets/new_theme.tres" id="3_6d2yf"]
+
+[node name="NetworkUI" type="CanvasLayer" unique_id=5356914 node_paths=PackedStringArray("network_layer", "ip_input", "name_input")]
+script = ExtResource("1_6d2yf")
+player_scene = ExtResource("2_6d2yf")
+network_layer = NodePath(".")
+ip_input = NodePath("Menu/IPInput")
+name_input = NodePath("Menu/NameInput")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1337352978]
+offset_right = 226.0
+offset_bottom = 132.0
+color = Color(0.03988873, 0.16744459, 0.15702507, 0.3254902)
+
+[node name="Menu" type="VBoxContainer" parent="." unique_id=1818027415]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -34.5
+offset_top = -45.0
+offset_right = 34.5
+offset_bottom = 45.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("3_6d2yf")
+
+[node name="NameInput" type="LineEdit" parent="Menu" unique_id=419825128]
+layout_mode = 2
+placeholder_text = "name"
+alignment = 1
+
+[node name="HostBtn" type="Button" parent="Menu" unique_id=1116863347]
+layout_mode = 2
+theme = ExtResource("3_6d2yf")
+text = "Host"
+
+[node name="JoinBtn" type="Button" parent="Menu" unique_id=484686726]
+layout_mode = 2
+text = "Join"
+
+[node name="IPInput" type="LineEdit" parent="Menu" unique_id=410577568]
+layout_mode = 2
+placeholder_text = "127.0.0.1"
+alignment = 1
+
+[connection signal="pressed" from="Menu/HostBtn" to="." method="_on_host_btn_pressed"]
+[connection signal="pressed" from="Menu/JoinBtn" to="." method="_on_join_btn_pressed"]

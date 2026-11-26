@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://om1a2i7qy75u"]
 
 [ext_resource type="Texture2D" uid="uid://bn66i5mugf6nt" path="res://assets/ASSET_PACK_02/sprite.png" id="1_avsvi"]
-[ext_resource type="Script" uid="uid://bgdmjkhk7rc82" path="res://tree.gd" id="1_viusy"]
+[ext_resource type="Script" uid="uid://bgdmjkhk7rc82" path="res://script/tree.gd" id="1_viusy"]
 [ext_resource type="Resource" uid="uid://cfx5jeoche2fy" path="res://Resources/wood.tres" id="2_qd6xs"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ict6q"]

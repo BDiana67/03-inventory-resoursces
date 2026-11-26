@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://m7u6acfbkbx" path="res://scenes/inventory.tscn" id="5_sek5r"]
 [ext_resource type="PackedScene" uid="uid://dr22vousi1fum" path="res://scenes/ui.tscn" id="5_xr56k"]
 [ext_resource type="PackedScene" uid="uid://om1a2i7qy75u" path="res://scenes/tree.tscn" id="6_i1yi8"]
+[ext_resource type="PackedScene" uid="uid://dsq5p1dfrblk5" path="res://scenes/network_ui.tscn" id="7_i1yi8"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qaq8c"]
 
@@ -26,9 +27,6 @@ y_sort_enabled = true
 tile_map_data = PackedByteArray("AAAAAAIAAQACAAAAAAAAAAMAAQACAAAAAAAAAAQAAQACAAAAAAAAAAUAAQACAAAAAAABAAUAAQACAAAAAAACAAYAAQACAAAAAAADAAcAAQACAAAAAAABAAYAAQACAAAAAAAEAAcAAQACAAAAAAAFAAcAAQACAAAAAAAGAAcAAQACAAAAAAAHAAcAAQACAAAAAAAIAAcAAQACAAAAAAAJAAcAAQACAAAAAAAKAAcAAQACAAAAAAALAAcAAQACAAAAAAAKAAYAAQACAAAAAAALAAYAAQACAAAAAAAMAAYAAQACAAAAAAAMAAUAAQACAAAAAAALAAUAAQACAAAAAAALAAQAAQACAAAAAAALAAMAAQACAAAAAAALAAIAAQACAAAAAAALAAEAAQACAAAAAAAMAAEAAQACAAAAAAAMAAIAAQACAAAAAAAMAAMAAQACAAAAAAAMAAQAAQACAAAAAAANAAQAAQACAAAAAAANAAMAAQACAAAAAAANAAIAAQACAAAAAAANAAUAAQACAAAAAAAKAAEAAQACAAAAAAAJAAEAAQACAAAAAAAJAAAAAQACAAAAAAAKAAAAAQACAAAAAAAIAAAAAQACAAAAAAAHAAAAAQACAAAAAAABAAEAAQACAAAAAAACAAEAAQACAAAAAAACAAAAAQACAAAAAAADAAAAAQACAAAAAAAEAAAAAQACAAAAAAAFAAAAAQACAAAAAAAGAAAAAQACAAAAAAACAAIAAQACAAAAAAABAAIAAQACAAAAAAABAAMAAQACAAAAAAABAAQAAQACAAAAAAACAAMAAQACAAAAAAADAAEAAQACAAAAAAAEAAEAAQACAAAAAAAFAAEAAQACAAAAAAAFAAQAAAAAAAAAAwAHAAIAAAAAAAAAAwA=")
 tile_set = ExtResource("1_bgcxa")
 
-[node name="Player" parent="." unique_id=1517154039 instance=ExtResource("2_yj5dr")]
-position = Vector2(123, 73)
-
 [node name="Ui" parent="." unique_id=980024229 instance=ExtResource("5_xr56k")]
 visible = false
 
@@ -46,4 +44,6 @@ shape = SubResource("RectangleShape2D_qaq8c")
 
 [node name="tree" parent="." unique_id=1999014982 instance=ExtResource("6_i1yi8")]
 
-[connection signal="body_entered" from="TransitionZone" to="Player" method="_on_transition_zone_body_entered"]
+[node name="NetworkUI" parent="." unique_id=5356914 node_paths=PackedStringArray("network_layer") instance=ExtResource("7_i1yi8")]
+player_scene = ExtResource("2_yj5dr")
+network_layer = NodePath(".")

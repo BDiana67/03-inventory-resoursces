@@ -4,9 +4,17 @@
 [ext_resource type="Script" uid="uid://brgp5kxrhn70b" path="res://script/Player.gd" id="1_xj21s"]
 [ext_resource type="Resource" uid="uid://b6kwbsaculfg7" path="res://Resources/axe.tres" id="2_qhqgy"]
 [ext_resource type="PackedScene" uid="uid://dyhurqj8yuk8l" path="res://scenes/item.tscn" id="3_dqkch"]
+[ext_resource type="FontFile" uid="uid://docn8gc40snbw" path="res://assets/ASSET_PACK_02/ComicoroRu_0.ttf" id="4_qlg0r"]
+[ext_resource type="Script" uid="uid://if3s4132y7kl" path="res://script/player_list.gd" id="6_tuyoq"]
+[ext_resource type="Theme" uid="uid://bip6qdu7ppvpu" path="res://assets/new_theme.tres" id="7_fjrip"]
+[ext_resource type="Script" uid="uid://bi10p83gqmqlg" path="res://script/chat.gd" id="8_smehm"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_g7enf"]
 radius = 4.1231055
+
+[sub_resource type="Theme" id="Theme_ub3iv"]
+default_font = ExtResource("4_qlg0r")
+default_font_size = 8
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xj21s"]
 atlas = ExtResource("1_x254q")
@@ -82,13 +90,26 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="Player" type="CharacterBody2D" unique_id=1258859765 node_paths=PackedStringArray("anim", "hand")]
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_qlg0r"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath("AnimatedSprite2D:animation")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+properties/2/path = NodePath("AnimatedSprite2D:flip_h")
+properties/2/spawn = true
+properties/2/replication_mode = 1
+
+[node name="Player" type="CharacterBody2D" unique_id=1258859765 node_paths=PackedStringArray("anim", "camera", "name_label", "hand") groups=["players"]]
 y_sort_enabled = true
 script = ExtResource("1_xj21s")
 anim = NodePath("AnimatedSprite2D")
 item_resources = ExtResource("2_qhqgy")
-item_world_scene = ExtResource("3_dqkch")
+camera = NodePath("Camera2D")
+name_label = NodePath("NameLabel")
 hand = NodePath("hand")
+item_world_scene = ExtResource("3_dqkch")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1879545288]
 position = Vector2(0, -4)
@@ -99,9 +120,19 @@ position = Vector2(0, -4)
 zoom = Vector2(2, 2)
 
 [node name="NameLabel" type="Label" parent="." unique_id=282031387]
-custom_minimum_size = Vector2(10, 10)
-offset_right = 40.0
-offset_bottom = 23.0
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -26.0
+offset_top = -18.0
+offset_right = 26.0
+offset_bottom = -10.0
+grow_horizontal = 0
+grow_vertical = 0
+size_flags_horizontal = 4
+theme = SubResource("Theme_ub3iv")
 horizontal_alignment = 1
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=277812556]
@@ -113,3 +144,67 @@ autoplay = "idle"
 frame_progress = 0.3516946
 
 [node name="hand" type="Sprite2D" parent="." unique_id=1418556950]
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=143846470]
+replication_config = SubResource("SceneReplicationConfig_qlg0r")
+
+[node name="PlayerListUI" type="CanvasLayer" parent="." unique_id=1131840814]
+visible = false
+script = ExtResource("6_tuyoq")
+
+[node name="Panel" type="Panel" parent="PlayerListUI" unique_id=1611188031]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 104.0
+offset_top = 2.0
+offset_right = -6.0
+offset_bottom = -61.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("7_fjrip")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PlayerListUI/Panel" unique_id=1901711973]
+layout_mode = 0
+offset_left = 6.0
+offset_top = 3.0
+offset_right = 109.0
+offset_bottom = 43.0
+
+[node name="Label" type="Label" parent="PlayerListUI/Panel/VBoxContainer" unique_id=1212408978]
+layout_mode = 2
+text = "     Игроки в сети:"
+
+[node name="Panel2" type="Panel" parent="PlayerListUI" unique_id=1990386220]
+offset_top = 1.0
+offset_right = 85.0
+offset_bottom = 131.0
+script = ExtResource("8_smehm")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PlayerListUI/Panel2" unique_id=127591615]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = 4.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ChatLog" type="VBoxContainer" parent="PlayerListUI/Panel2/VBoxContainer" unique_id=1005289334]
+layout_mode = 2
+theme = ExtResource("7_fjrip")
+
+[node name="Input" type="LineEdit" parent="PlayerListUI/Panel2/VBoxContainer" unique_id=301039539]
+layout_mode = 2
+theme_override_font_sizes/font_size = 5
+placeholder_text = "Введите сооб..."
+
+[node name="SendBtn" type="Button" parent="PlayerListUI/Panel2/VBoxContainer" unique_id=247996055]
+layout_mode = 2
+theme = ExtResource("7_fjrip")
+theme_override_font_sizes/font_size = 5
+text = "Отправить"
+
+[connection signal="pressed" from="PlayerListUI/Panel2/VBoxContainer/SendBtn" to="." method="_on_send_btn_pressed"]
